@@ -1,0 +1,301 @@
+<% include header %>
+
+    <div style="position: relative;">
+        <div class="wrap mb-3">
+            <div class="container-fluid" id="app">
+                <br />
+                <h1>Bảng báo giá chức năng website:</h1>
+                <br />
+                <section>
+                    <h2>Thông tin khách hàng:</h2>
+                    <p>Người đại diện: <span>Phan Minh Trung</span></p>
+                    <p>Ngày xác nhận: <span>15/04/2020</span></p>
+                    <p>Trạng thái: <span>Chọn layout, chức năng</span></p>
+                    <p>Giá chưa khuyến mãi(dự kiến): <span v-money='taltolMoney'>{{taltolMoney}}</span></p>
+                    <p>Mức khuyến mãi: <span>{{sale}}%</span></p>
+                    <p>Tổng giá dự kiến: <span v-money='sumMoney'>{{sumMoney}}</span></p>
+                </section>
+                <section>
+                    <h2>Chức năng:
+                        <button class="btn btn-outline-primary" v-on:click='saveData'>
+                            {{textButton}} <span class="spinner-grow spinner-grow-sm d-none" id="spinnerBtnSave" role="status" aria-hidden="true"></span>
+                        </button>
+                    </h2>
+                    <form action="/">
+                        <div class="accordion" id="accordionExample">
+
+                            <div class="card">
+                                <div style="cursor: pointer;" class="card-header p-0">
+                                    <h3 class="mb-0 p-2" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Chức năng cơ bản: <span v-money='taltolBasic'>{{taltolBasic}}</span>
+                                    </h3>
+                                </div>
+
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" style="width: 15%;">Chức năng</th>
+                                                    <th scope="col">Mô tả</th>
+                                                    <th scope="col" style="width: 15%;">Mức giá</th>
+                                                    <th scope="col" style="width: 15%;">Tùy chọn</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td data-label="Chức năng" class="text-table-left">Web cơ bản</td>
+                                                    <td data-label="Mô tả" class="text-table-left">
+                                                        Xây dựng các chức năng cơ bản của một trang web như: trang chủ, trang chi tiết, trang giới thiệu, trang liên hệ, hỗ trợ đưa web lên host và trỏ tên miền
+                                                    </td>
+                                                    <td v-money='objFunction.basic.basicWeb.money' data-label="Mức giá">{{objFunction.basic.basicWeb.money}}</td>
+                                                    <td data-label="Tùy chọn">
+                                                        <div class="custom-control custom-checkbox mr-sm-2">
+                                                            <input type="checkbox" v-model='objFunction.basic.basicWeb.isActive' class="custom-control-input readonly" onclick="return false;" id="choseBasic" />
+                                                            <label class="custom-control-label" for="choseBasic"></label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td data-label="Chức năng" class="text-table-left">Reponsive</td>
+                                                    <td data-label="Mô tả" class="text-table-left">
+                                                        Giúp website tự động thay đổi cách hiển thị sao cho phù hợp nhất với các loại kích thươc màn hình.
+                                                    </td>
+                                                    <td v-money='objFunction.basic.reponsive.money' data-label="Mức giá">{{objFunction.basic.reponsive.money}}</td>
+                                                    <td data-label="Tùy chọn">
+                                                        <div class="custom-control custom-checkbox mr-sm-2">
+                                                            <input type="checkbox" class="custom-control-input readonly" v-model='objFunction.basic.reponsive.isActive' checked onclick="return false;" id="choseReponsive" />
+                                                            <label class="custom-control-label" for="choseReponsive"></label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div style="cursor: pointer;" class="card-header p-0">
+                                    <h3 class="mb-0 p-2" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Ngôn ngữ: <span v-money='taltolLanguage'>{{taltolLanguage}}</span>
+                                    </h3>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" style="width: 15%;">Chức năng</th>
+                                                    <th scope="col">Mô tả</th>
+                                                    <th scope="col" style="width: 15%;">Mức giá</th>
+                                                    <th scope="col" style="width: 15%;">Tùy chọn</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td data-label="Chức năng" class="text-table-left">Ngôn ngữ chính</td>
+                                                    <td data-label="Mô tả" class="text-table-left">
+                                                        Trang web được hiển thị bằng ngôn ngữ khách hàng yêu cầu.
+                                                    </td>
+                                                    <td data-label="Mức giá"><span v-money='objFunction.language.mainLanguage.money'>0</span></td>
+                                                    <td data-label="Tùy chọn">
+                                                        <div class="custom-control custom-checkbox mr-sm-2">
+                                                            <input type="checkbox" class="custom-control-input readonly" v-model='objFunction.language.mainLanguage.isActive' id="choseMainLanguage" />
+                                                            <label class="custom-control-label" for="choseMainLanguage"></label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td data-label="Chức năng" class="text-table-left">Đa ngôn ngữ</td>
+                                                    <td data-label="Mô tả" class="text-table-left">
+                                                        Mua thêm gói ngôn ngữ hiện thị trên website.
+                                                    </td>
+                                                    <td data-label="Mức giá">
+                                                        <span v-money='objFunction.language.multiLanguage.money'>
+                                                        {{objFunction.language.multiLanguage.money}}
+                                                    </span> / 1 ngôn ngữ
+                                                    </td>
+                                                    <td data-label="Tùy chọn">
+                                                        <input v-model='objFunction.language.multiLanguage.count' type="number" min="0" style="width: 60px;" id="choseSecondLanguage" />
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div style="cursor: pointer;" class="card-header p-0">
+                                    <h3 class="mb-0 p-2" id="heading3" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                                        Chức năng tìm kiếm: <span v-money='taltolSearch'>{{taltolSearch}}</span>
+                                    </h3>
+                                </div>
+                                <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" style="width: 15%;">Chức năng</th>
+                                                    <th scope="col">Mô tả</th>
+                                                    <th scope="col" style="width: 15%;">Mức giá</th>
+                                                    <th scope="col" style="width: 15%;">Tùy chọn</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td data-label="Chức năng" class="text-table-left">Search cơ bản</td>
+                                                    <td data-label="Mô tả" class="text-table-left">
+                                                        Tìm kiếm theo trường tiêu đề bài viết
+                                                    </td>
+                                                    <td data-label="Mức giá" v-money='objFunction.search.basic.money'>{{objFunction.search.basic.money}}</td>
+                                                    <td data-label="Tùy chọn">
+                                                        <div class="custom-control custom-checkbox mr-sm-2">
+                                                            <input type="checkbox" v-model='objFunction.search.basic.isActive' v-on:input='unCheckObjFuntion($event,"search","advanced")' class="custom-control-input" id="choseSearchBasic" />
+                                                            <label class="custom-control-label" for="choseSearchBasic"></label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td data-label="Chức năng" class="text-table-left">Search nâng cao</td>
+                                                    <td data-label="Mô tả" class="text-table-left">
+                                                        Xây dựng các chức năng tìm kiếm nâng cao(phân loại theo hạng mục, theo giá, theo khu vực...), gợi ý khi nhập nội dung tìm kiếm...
+                                                    </td>
+                                                    <td data-label="Mức giá" v-money='objFunction.search.advanced.money'>{{objFunction.search.advanced.money}}</td>
+                                                    <td data-label="Tùy chọn">
+                                                        <div class="custom-control custom-checkbox mr-sm-2">
+                                                            <input type="checkbox" v-model='objFunction.search.advanced.isActive' v-on:input='checkObjFuntion($event,"search","basic")' class="custom-control-input readonly" id="choseSearchAdv" />
+                                                            <label class="custom-control-label" for="choseSearchAdv"></label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div style="cursor: pointer;" class="card-header p-0">
+                                    <h3 class="mb-0 p-2" id="heading5" data-toggle="collapse" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                                        Chúc năng bản đồ(chức năng này sẽ không bao gồm tiền mua key của các dịch vụ bản đồ):
+                                        <span v-money='taltolMap'>{{taltolMap}}</span>
+                                    </h3>
+                                </div>
+                                <div id="collapse5" class="collapse" aria-labelledby="heading5" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" style="width: 15%;">Chức năng</th>
+                                                    <th scope="col">Mô tả</th>
+                                                    <th scope="col" style="width: 15%;">Mức giá</th>
+                                                    <th scope="col" style="width: 15%;">Tùy chọn</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td data-label="Chức năng" class="text-table-left">Cơ bản</td>
+                                                    <td data-label="Mô tả" class="text-table-left">
+                                                        Hiển thị vị trí của công ty trong phần giới thiệu
+                                                    </td>
+                                                    <td data-label="Mức giá" v-money='objFunction.map.basic.money'>{{objFunction.map.basic.money}}</td>
+                                                    <td data-label="Tùy chọn">
+                                                        <div class="custom-control custom-checkbox mr-sm-2">
+                                                            <input type="checkbox" class="custom-control-input readonly" v-on:input='unCheckObjFuntion($event,"map","advanced")' v-model='objFunction.map.basic.isActive' ref='choseMapBasic' id="choseMapBasic" />
+                                                            <label class="custom-control-label" for="choseMapBasic"></label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td data-label="Chức năng" class="text-table-left">Nâng cao</td>
+                                                    <td data-label="Mô tả" class="text-table-left">
+                                                        Hiển thị bản đồ vị trí của dịch vụ mà bạn muốn bán trên bản đồ, hiện thì các địa điểm tương ứng theo bản đồ
+                                                    </td>
+                                                    <td data-label="Mức giá" v-money='objFunction.map.advanced.money'>{{objFunction.map.advanced.money}}</td>
+                                                    <td data-label="Tùy chọn">
+                                                        <div class="custom-control custom-checkbox mr-sm-2">
+                                                            <input v-model='objFunction.map.advanced.isActive' v-on:input='checkObjFuntion($event,"map","basic")' type="checkbox" class="custom-control-input readonly" ref='choseMapAdv' id="choseMapAdv" />
+                                                            <label class="custom-control-label" for="choseMapAdv"></label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div style="cursor: pointer;" class="card-header p-0">
+                                    <h3 class="mb-0 p-2" id="heading4" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                                        Chức năng admin(quản lý website): <span v-money='taltolAdmin'>{{taltolAdmin}}</span>
+                                    </h3>
+                                </div>
+                                <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" style="width: 15%;">Chức năng</th>
+                                                    <th scope="col">Mô tả</th>
+                                                    <th scope="col" style="width: 15%;">Mức giá</th>
+                                                    <th scope="col" style="width: 15%;">Tùy chọn</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td data-label="Chức năng" class="text-table-left">Cơ bản</td>
+                                                    <td data-label="Mô tả" class="text-table-left">
+                                                        Xây dựng trang admin để bạn có thể tự thêm, chỉnh sửa, xóa các sản phẩm của công ty.
+                                                    </td>
+                                                    <td data-label="Mức giá" v-money='objFunction.admin.basic.money'>{{objFunction.admin.basic.money}}</td>
+                                                    <td data-label="Tùy chọn">
+                                                        <div class="custom-control custom-checkbox mr-sm-2">
+                                                            <input type="checkbox" class="custom-control-input readonly" v-model='objFunction.admin.basic.isActive' v-on:input='unCheckObjFuntion($event,"admin","decentralized"),unCheckObjFuntion($event,"admin","email")' id="choseAdminBasic" />
+                                                            <label class="custom-control-label" for="choseAdminBasic"></label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td data-label="Chức năng" class="text-table-left">Phân quyền</td>
+                                                    <td data-label="Mô tả" class="text-table-left">
+                                                        Phân quyền có thể giúp bạn xác định nhân viên nào có thể thêm, có thể sửa, có thể xóa bài viết trong website của bạn.
+                                                    </td>
+                                                    <td data-label="Mức giá" v-money='objFunction.admin.decentralized.money'>{{objFunction.admin.decentralized.money}}</td>
+                                                    <td data-label="Tùy chọn">
+                                                        <div class="custom-control custom-checkbox mr-sm-2">
+                                                            <input type="checkbox" class="custom-control-input readonly" v-model='objFunction.admin.decentralized.isActive' v-on:input='checkObjFuntion($event,"admin","basic")' id="choseAdvAdmin" />
+                                                            <label class="custom-control-label" for="choseAdvAdmin"></label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td data-label="Chức năng" class="text-table-left">Gửi mail</td>
+                                                    <td data-label="Mô tả" class="text-table-left">
+                                                        Khi khách hàng gửi thông tin sẽ có email thông báo đến một hoặc nhiều thành viên của công ty, có thể trả lời trực tiếp trên giao diện admin.
+                                                    </td>
+                                                    <td data-label="Mức giá" v-money='objFunction.admin.email.money'>{{objFunction.admin.email.money}}</td>
+                                                    <td data-label="Tùy chọn">
+                                                        <div class="custom-control custom-checkbox mr-sm-2">
+                                                            <input type="checkbox" class="custom-control-input readonly" v-on:input='checkObjFuntion($event,"admin","basic")' v-model='objFunction.admin.email.isActive' id="choseEmailAdmin" />
+                                                            <label class="custom-control-label" for="choseEmailAdmin"></label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <% include footer %>
