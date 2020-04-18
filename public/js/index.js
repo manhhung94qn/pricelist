@@ -145,6 +145,7 @@ var app = new Vue({
         },
         saveData() {
             $('#spinnerBtnSave').hide();
+            this.textButton = 'Đang lưu';
             $.ajax({
                 url: '/api',
                 method: 'POST',
